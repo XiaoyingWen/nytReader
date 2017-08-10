@@ -1,8 +1,57 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+        padding: 50px;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+        background-color: #F2F6D0
 }
 
 a {
-  color: #00B7FF;
+        color: #00B7FF;
+}
+
+#wrapper {
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
+}
+
+#articles {
+        display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 700px;
+}
+
+.story {
+        padding-bottom: 10px;
+}
+
+.summary {
+        color: grey;
+        font-style: italic;
+}
+
+.tellingdate {
+  font-size:smaller;
+}
+
+#comments {
+        float: right;
+        width: 30%;
+}
+
+textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+}
+
+input {
+        height: 36px;
+        font-size: 24px;
+}
+
+textarea {
+        height: 200px;
+        font-size: 18px;
 }

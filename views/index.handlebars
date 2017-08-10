@@ -1,0 +1,14 @@
+<div id="wrapper">
+	<h1>Top Health News @ New York Times</h1>
+	<h2><i>..............................................</i></h2>
+	<div id="articles">
+		{{#each articles}}
+			<div class="story" data-id='{{this._id}}'>
+			    <strong>{{this.title}}</strong><div class="tellingdate">{{this.date}}</div>
+			    <div class="summary">{{this.summary}} <a href="{{this.link}}" target="_blank">Read more...
+			    </a></div>
+		    </div>
+		{{/each}}
+	</div>
+	<div id="comments"></div>
+</div>
