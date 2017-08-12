@@ -47,18 +47,20 @@ app.use(function(err, req, res, next) {
 });
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/nythealthnews");
-/*var db = mongoose.connection;
+// Here we find an appropriate database to connect to, defaulting to
+// localhost if we don't find one.
+var dburistring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nythealthnews';
+//mongoose.connect("mongodb://localhost/nythealthnews");
 
-// Show any mongoose errors
-/*db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
-});
-
-// Once logged in to the db through mongoose, log a success message
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});*/
+// Makes connection asynchronously.  Mongoose will queue up database
+// operations and release them when the connection is complete.
+mongoose.connect(dburistring, function (err, res) {
+      if (err) {
+      console.log ('ERROR connecting to: ' + dburistring + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + dburistring);
+      }
+    });
 
 module.exports = app;
 

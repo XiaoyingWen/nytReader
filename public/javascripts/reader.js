@@ -5,26 +5,48 @@ function refreshComments(data){
   $("#comments").empty();
 
   // The title of the article
-  $("#comments").append("<h2>Comments for: " + data.title + "</h2>");
+  $("#comments").append("<h2>Comments for: <span class='commfor'>" + data.title + "</span></h2>");
 
   // The comments of the article
   data.comments.forEach(function(element) {
   //console.log(element);
-    var comm = element.readerName
-        + " posted on " + element.createdAt + ": " + element.body;
-    $("#comments").append($("<p></p>").text(comm));
-    $("#comments").append("<button data-id='" + element._id 
+  /*$('<div/>')
+    .attr("id", "newDiv1")
+    .addClass("newDiv purple bloated")
+    .append("<span/>")
+      .text("hello world")*/
+      var commbox = $('<div/>').addClass("comment");
+      /*var speaker = $('<div/>').addClass("speaker").text(element.readerName
+        +' <span class="commdt">Posted on: ' + moment(element.createdAt).format("MMM Do YYYY, h:mm:ss a")+"</span>");  */   
+      commbox.append('<div class="speaker">'+element.readerName
+        +' <span class="commdt">Posted on: ' 
+        + moment(element.createdAt).format("MMM Do YYYY, h:mm:ss a")+"</span>");     
+
+      commbox.append('<div class="readercomm">'+element.body
+        + " <a href='#' data-id='" + element._id 
+      + "' article-id='" + data._id 
+      + "' id='deletecomment'><span class='glyphicon glyphicon-remove'></span></a></div>");
+
+    $("#comments").append(commbox);
+  /*  $("#comments").append("<button data-id='" + element._id 
       + "' article-id='" + data._id + "'' id='deletecomment'>X</button>");
+
+    $("#comments").append("<a href='#' data-id='" + element._id 
+      + "' article-id='" + data._id 
+      + "' id='deletecomment'><span class='glyphicon glyphicon-remove'></span></a>");*/
   });
 
+      var newcommbox = $('<div/>');
+newcommbox.append("<h2>Add you comment</h2>");
   // An input to enter reader name
-  $("#comments").append("<p>Your Name:</p><input id='readerinput' name='reader' >");
+  newcommbox.append("<p>Your Name:</p><input id='readerinput' name='reader' >");
 
   // A textarea to add a new comment body
-  $("#comments").append("<p>Enter Comment:</p><textarea id='bodyinput' name='body'></textarea>");
+  newcommbox.append("<p>Enter Comment:</p><textarea id='bodyinput' name='body'></textarea>");
 
   // A button to submit a new comment, with the id of the article saved to it
-  $("#comments").append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
+  newcommbox.append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
+      $("#comments").append(newcommbox);
 }
 
 // Whenever someone clicks a p tag

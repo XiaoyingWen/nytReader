@@ -10,38 +10,52 @@ router.get('/', function(req, res, next) {
 	// A GET request to scrape the echojs website
 	  request("https://www.nytimes.com/section/health", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(html);
-    // Now, we grab every h2 within an article tag, and do the following:
+      var $ = cheerio.load(html);
+      // Now, we grab every h2 within an article tag, and do the following:
 
-    $("article.story.theme-summary.has-kicker").each(function(i, element) {
-      // Save an empty result object
-      var result = {};
+      $("article.story.theme-summary.has-kicker").each(function(i, element) {
 
-      // Save these results in an object that we'll push into the results array we defined earlier
-      result.link = $(element).find('a').attr("href").trim();
-      result.summary = $(element).find('p.summary').text().trim();
-      result.title = $(element).find('h2.headline').text().trim();
-      result.date = $(element).children('footer').children('time').text().trim();
-      result.storyId = $(element).parent().attr('id');
+        var articleStoryId = $(element).parent().attr('id') || "0";
+        console.log("check any record with storyId: '" + articleStoryId +"'");
+        Article.find({storyId: articleStoryId}).exec(function(error, doc) {
+          if (error) {
+            console.log(error);
+          }
+          // Or send the doc to the browser as a json object
+          else {
+            if(doc.length === 0){
+               console.log("add: " + articleStoryId);
 
-      // Using our Article model, create a new entry
-      // This effectively passes the result object to the entry (and the title and link)
-      var entry = new Article(result);
+               // Save these results in an object that we'll push into the results array we defined earlier
+                var result = {};
+                result.link = $(element).find('a').attr("href").trim();
+                result.summary = $(element).find('p.summary').text().trim();
+                result.title = $(element).find('h2.headline').text().trim();
+                result.date = $(element).children('footer').children('time').text().trim();
+                result.storyId = $(element).parent().attr('id');
 
-      // Now, save that entry to the db
-      entry.save(function(err, doc) {
-        // Log any errors
-        if (err) {
-          console.log(err);
-        }
-        // Or log the doc
-        else {
-          console.log(doc);
-        }
-      });
+                // Using our Article model, create a new entry
+                // This effectively passes the result object to the entry (and the title and link)
+                var entry = new Article(result);
 
-    });
-  });
+                // Now, save that entry to the db
+                entry.save(function(err, doc) {
+                  // Log any errors
+                  if (err) {
+                    console.log(err);
+                  }
+                  // Or log the doc
+                  else {
+                    console.log(doc);
+                  }
+                });
+            } else {
+              console.log("find existing record with: " + articleStoryId);
+            }
+          }
+        });  //lookup storyId and save record if it is a new story
+      }); //for each story found in the web page
+  }); //access the web page
 
   res.redirect('/articles');
 });
@@ -49,7 +63,7 @@ router.get('/', function(req, res, next) {
 // This will get the articles we scraped from the mongoDB
 router.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({}, function(error, doc) {
+  Article.find({}).sort({ _id: -1 }).limit(15).exec(function(error, doc) {
     //do not populate comments!! 
     //only upon one article-click load the comments
     // Log any errors
