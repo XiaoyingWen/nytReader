@@ -52,9 +52,10 @@ router.get('/', function(req, res, next) {
                                 //console.log(doc);
                             }
                         });
-                    } else {
-                        console.log("find existing record with: " + articleStoryId);
                     }
+                    // else {
+                    //     console.log("find existing record with: " + articleStoryId);
+                    // }
                 }
             }); //end lookup storyId and save record if it is a new story
         }); //end for each story found in the web page

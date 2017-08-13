@@ -19,7 +19,8 @@ a {
     height: 700px;
 }
 .story {
-    padding-bottom: 10px;
+    color: #3F3F96;
+    padding-bottom: 15px;
 }
 .summary {
     color: grey;

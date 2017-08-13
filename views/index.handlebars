@@ -5,6 +5,7 @@
         {{#each articles}}
         <div class="story" data-id='{{this._id}}'>
             <strong>{{this.title}}</strong>
+            <span class="glyphicon glyphicon-comment"></span>
             <div class="tellingdate">{{formatTime this.date "MMM Do, YYYY"}}</div>
             <div class="summary">{{this.summary}} <a href="{{this.link}}" target="_blank">Read more...</a></div>
         </div>
