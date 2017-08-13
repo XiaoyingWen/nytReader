@@ -55,7 +55,7 @@ app.use(function(err, req, res, next) {
 // Database configuration with mongoose
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
-var dburistring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nythealthnews';
+var dburistring = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nythealthnews';
 
 // Makes connection asynchronously.  Mongoose will queue up database
 // operations and release them when the connection is complete.
