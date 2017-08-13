@@ -5,7 +5,7 @@ function refreshComments(data){
   $("#comments").empty();
 
   // The title of the article
-  $("#comments").append("<h2>Comments for: <span class='commfor'>" + data.title + "</span></h2>");
+  $("#comments").append('<a href="#" class="commfor"><span class="glyphicon glyphicon-comment"></span> ' + data.title + "</a>");
 
   // The comments of the article
   data.comments.forEach(function(element) {
@@ -15,12 +15,12 @@ function refreshComments(data){
     .addClass("newDiv purple bloated")
     .append("<span/>")
       .text("hello world")*/
-      var commbox = $('<div/>').addClass("comment");
+      var commbox = $('<div/>').addClass("commentbox");
       /*var speaker = $('<div/>').addClass("speaker").text(element.readerName
         +' <span class="commdt">Posted on: ' + moment(element.createdAt).format("MMM Do YYYY, h:mm:ss a")+"</span>");  */   
       commbox.append('<div class="speaker">'+element.readerName
-        +' <span class="commdt">Posted on: ' 
-        + moment(element.createdAt).format("MMM Do YYYY, h:mm:ss a")+"</span>");     
+        +' <span class="commdt">Posted on: ' //fromNow() //format("MMM Do YYYY, h:mm:ss a")
+        + moment(element.createdAt).fromNow()+"</span>");     
 
       commbox.append('<div class="readercomm">'+element.body
         + " <a href='#' data-id='" + element._id 
@@ -37,15 +37,15 @@ function refreshComments(data){
   });
 
       var newcommbox = $('<div/>');
-newcommbox.append("<h2>Add you comment</h2>");
+newcommbox.append('<div class="newcomm">Add comment</div>');
   // An input to enter reader name
-  newcommbox.append("<p>Your Name:</p><input id='readerinput' name='reader' >");
-
+  newcommbox.append("<p>* Your Name:</p><input id='readerinput' name='reader' >");
+      
   // A textarea to add a new comment body
-  newcommbox.append("<p>Enter Comment:</p><textarea id='bodyinput' name='body'></textarea>");
+  newcommbox.append("<p>* Enter Comment:</p><textarea id='bodyinput' name='body'></textarea>");
 
   // A button to submit a new comment, with the id of the article saved to it
-  newcommbox.append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
+  newcommbox.append("<button class='btn btn-primary' type='submit' data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
       $("#comments").append(newcommbox);
 }
 
@@ -71,7 +71,7 @@ $(document).on("click", ".story", function() {
 $(document).on("click", "#savecomment", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
-
+if( $("#readerinput").val() && $("#bodyinput").val()){
   // Run a POST request to change the comment, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -90,7 +90,10 @@ $(document).on("click", "#savecomment", function() {
 
   // Also, remove the values entered in the input and textarea for comment entry
   $("#readerinput").val("");
-  $("#bodyinput").val("");
+  $("#bodyinput").val("");}
+  else{
+    alert("Both your name and the comment are required.")
+  }
 });
 
 

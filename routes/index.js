@@ -4,6 +4,7 @@ var Comment = require("./../models/Comment.js");
 var Article = require("./../models/Article.js");
 var request = require("request");
 var cheerio = require("cheerio");
+var moment = require('moment')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -31,7 +32,7 @@ router.get('/', function(req, res, next) {
                 result.link = $(element).find('a').attr("href").trim();
                 result.summary = $(element).find('p.summary').text().trim();
                 result.title = $(element).find('h2.headline').text().trim();
-                result.date = $(element).children('footer').children('time').text().trim();
+                result.date = new Date(moment($(element).children('footer').children('time').attr("datetime").trim(), 'YYYY-MM-DD', true).format());
                 result.storyId = $(element).parent().attr('id');
 
                 // Using our Article model, create a new entry
@@ -63,7 +64,7 @@ router.get('/', function(req, res, next) {
 // This will get the articles we scraped from the mongoDB
 router.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({}).sort({ _id: -1 }).limit(15).exec(function(error, doc) {
+  Article.find({}).sort({ date: -1 }).limit(15).exec(function(error, doc) {
     //do not populate comments!! 
     //only upon one article-click load the comments
     // Log any errors
@@ -85,7 +86,10 @@ router.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   Article.findOne({ "_id": req.params.id })
   // ..and populate all of the notes associated with it
-  .populate("comments")
+  .populate({
+        path: "comments",
+        options: { sort: [{ "createdAt": -1 }]}
+    }) //      select: "name email phone",
   // now, execute our query
   .exec(function(error, doc) {
     // Log any errors

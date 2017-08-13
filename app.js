@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
+var helpers = require('./views/helpers/helpers');
 var mongoose = require("mongoose");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
@@ -15,7 +16,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); //
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({defaultLayout: 'main', "helpers": helpers}));
 app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
@@ -49,7 +50,7 @@ app.use(function(err, req, res, next) {
 // Database configuration with mongoose
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
-var dburistring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/nythealthnews';
+var dburistring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/healthnews';
 //mongoose.connect("mongodb://localhost/nythealthnews");
 
 // Makes connection asynchronously.  Mongoose will queue up database

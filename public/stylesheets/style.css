@@ -5,7 +5,7 @@ body {
 }
 
 a {
-        color: #00B7FF;
+        color: #3F3F96;
 }
 
 #wrapper {
@@ -40,20 +40,22 @@ a {
         width: 30%;
 }
 
-.commfor {
-      font-size:smaller;
-          color: grey;
-    font-style: italic;
-}
+.commentbox {
+    padding-top: 5px;
 }
 
-.comment {
-    padding-bottom: 20px;
+.commfor {
+    font-size: larger;
+    font-weight: bold;
 }
 
 .readercomm a {
-        color: red;
+    color: red;
       font-size: smaller;
+}
+
+.readercomm {
+    color: blue;
 }
 
 .commdt {
@@ -63,8 +65,12 @@ a {
 }
 
 .speaker{
-    color: #00B7FF;
     font-weight: bold;
+}
+
+.newcomm {
+    font-weight: bold;
+    padding-top: 15px;
 }
 
 textarea, input {
@@ -75,10 +81,8 @@ textarea, input {
 
 input {
         height: 36px;
-     /*   font-size: 24px;*/
 }
 
 textarea {
         height: 100px;
-     /*   font-size: 18px;*/
 }

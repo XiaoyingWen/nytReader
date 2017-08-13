@@ -25,7 +25,7 @@ var ArticleSchema = new Schema({
     required: true
   },
   date: {
-    type: String,
+    type: Date,
     required: true
   },
   // This only saves one comment's ObjectId, ref refers to the Comment model
