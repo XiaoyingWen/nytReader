@@ -1,7 +1,8 @@
 'use strict';
 var moment = require('moment')
 
-exports.formatTime = function (date, format) {
+//give the string of the date with the needed format for display
+exports.formatTime = function(date, format) {
     var mmnt = moment(date);
     return mmnt.format(format);
 };

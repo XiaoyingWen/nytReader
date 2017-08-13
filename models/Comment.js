@@ -5,21 +5,23 @@ var Schema = mongoose.Schema;
 
 // Create the Comment schema
 var CommentSchema = new Schema({
-  // Just a string
-  readerName: {
-    type: String
-  },
-  createdAt: {
-  	type: Date,
-  	default: Date.now
-  },
-  // Just a string
-  body: {
-    type: String
-  }
+    // Just a string
+    readerName: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    // Just a string
+    body: {
+        type: String,
+        required: true
+    }
 });
 
-// Remember, Mongoose will automatically save the ObjectIds of the comments
+// Mongoose will automatically save the ObjectIds of the comments
 // These ids are referred to in the Article model
 
 // Create the Comment model with the CommentSchema

@@ -5,34 +5,32 @@ var Schema = mongoose.Schema;
 
 // Create article schema
 var ArticleSchema = new Schema({
-  storyId: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  // title is a required string
-  title: {
-    type: String,
-    required: true
-  },
-  // link is a required string
-  link: {
-    type: String,
-    required: true
-  },
-  summary: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: Date,
-    required: true
-  },
-  // This only saves one comment's ObjectId, ref refers to the Comment model
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
-  }]
+    storyId: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    summary: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    // one article has many comment's ObjectId, ref refers to the Comment model
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }]
 });
 
 // Create the Article model with the ArticleSchema

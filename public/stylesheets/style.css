@@ -1,88 +1,77 @@
 body {
-        padding: 50px;
-        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-        background-color: #F2F6D0
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #F2F6D0
 }
-
 a {
-        color: #3F3F96;
+    color: #3F3F96;
 }
-
 #wrapper {
-        width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
 }
-
 #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
+    display: inline-block;
+    overflow: auto;
+    width: 60%;
+    height: 700px;
 }
-
 .story {
-        padding-bottom: 10px;
+    padding-bottom: 10px;
 }
-
 .summary {
-        color: grey;
-        font-style: italic;
+    color: grey;
+    font-style: italic;
 }
-
 .tellingdate {
-  font-size:smaller;
+    font-size: smaller;
 }
-
 #comments {
-        float: right;
-        width: 30%;
+    float: right;
+    width: 30%;
 }
-
 .commentbox {
-    padding-top: 5px;
+    padding-top: 10px;
 }
-
 .commfor {
     font-size: larger;
     font-weight: bold;
 }
-
 .readercomm a {
     color: red;
-      font-size: smaller;
+    font-size: smaller;
 }
-
 .readercomm {
     color: blue;
 }
-
 .commdt {
     color: grey;
     font-weight: normal;
-    font-size:smaller;
+    font-size: smaller;
 }
-
-.speaker{
+.speaker {
     font-weight: bold;
 }
-
 .newcomm {
     font-weight: bold;
-    padding-top: 15px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
-
-textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-}
-
+textarea,
 input {
-        height: 36px;
+    display: block;
+    width: 100%;
+    background-color: #FCF5C7;
 }
-
+input {
+    height: 36px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
 textarea {
-        height: 100px;
+    height: 100px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
